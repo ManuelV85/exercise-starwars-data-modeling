@@ -28,8 +28,8 @@ class Character(Base):
     character_name = Column(String(100), nullable=False)
     description = Column(String(250), nullable = False)
 
-class Ships(Base):
-    __tablename__='character'
+class Ship(Base):
+    __tablename__='ship'
     id = Column(Integer, primary_key=True)
     ships_name = Column(String(100), nullable=False)
     description = Column(String(250), nullable = False)
@@ -53,13 +53,13 @@ class Character_favorite(Base):
     character = relationship(Character)
 
 
-class Ships_favorite(Base):
-    __tablename__='ships_favorite'
+class Ship_favorite(Base):
+    __tablename__='ship_favorite'
     id = Column(Integer, primary_key=True)
     account_id = Column(Integer, ForeignKey('account.id'))
     account = relationship(Account)
-    ships_id= Column(Integer, ForeignKey('ships.id'))
-    ships = relationship(Ships)
+    ship_id= Column(Integer, ForeignKey('ship.id'))
+    ship = relationship(Ship)
 
 
 def to_dict(self):
