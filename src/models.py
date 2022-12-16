@@ -8,26 +8,59 @@ from eralchemy2 import render_er
 
 Base = declarative_base()
 
-class Person(Base):
-    __tablename__ = 'person'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
+class Account(Base):
+    __tablename__ = 'account'
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
+    email = Column(String(50), nullable=False)
+    password = Column(String(10), nullable=False)
 
-class Address(Base):
-    __tablename__ = 'address'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
+class Planet(Base):
+    __tablename__ = 'planet'
     id = Column(Integer, primary_key=True)
-    street_name = Column(String(250))
-    street_number = Column(String(250))
-    post_code = Column(String(250), nullable=False)
-    person_id = Column(Integer, ForeignKey('person.id'))
-    person = relationship(Person)
+    planet_name = Column(String(50), nullable = False)
 
-    def to_dict(self):
-        return {}
+class Character(Base):
+    __tablename__='character'
+    id = Column(Integer, primary_key=True)
+    character_name = Column(String(100), nullable=False)
+
+class Ships(Base):
+    __tablename__='character'
+    id = Column(Integer, primary_key=True)
+    ships_name = Column(String(100), nullable=False)
+
+
+class Planet_Favorite(Base):
+    __tablename__='planet_favorite'
+    id = Column(Integer, primary_key=True)
+    account_id = Column(Integer, ForeignKey('account.id'))
+    account = relationship(Account)
+    planet_id= Column(Integer, ForeignKey('planet.id'))
+    planet = relationship(Planet)
+
+  
+class Character_favorite(Base):
+    __tablename__='character_favorite'
+    id = Column(Integer, primary_key=True)
+    account_id = Column(Integer, ForeignKey('account.id'))
+    account = relationship(Account)
+    character_id= Column(Integer, ForeignKey('character.id'))
+    character = relationship(Character)
+
+
+class Ships_favorite(Base):
+    __tablename__='ships_favorite'
+    id = Column(Integer, primary_key=True)
+    account_id = Column(Integer, ForeignKey('account.id'))
+    account = relationship(Account)
+    ships_id= Column(Integer, ForeignKey('ships.id'))
+    ships = relationship(Ships)
+
+
+def to_dict(self):
+        return {}   
+
+
 
 ## Draw from SQLAlchemy base
 render_er(Base, 'diagram.png')
