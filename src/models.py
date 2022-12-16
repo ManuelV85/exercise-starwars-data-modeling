@@ -11,6 +11,8 @@ Base = declarative_base()
 class Account(Base):
     __tablename__ = 'account'
     id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+    last_name = Column(String(250), nullable=False)
     email = Column(String(50), nullable=False)
     password = Column(String(10), nullable=False)
 
@@ -18,16 +20,19 @@ class Planet(Base):
     __tablename__ = 'planet'
     id = Column(Integer, primary_key=True)
     planet_name = Column(String(50), nullable = False)
+    description = Column(String(250), nullable = False)
 
 class Character(Base):
     __tablename__='character'
     id = Column(Integer, primary_key=True)
     character_name = Column(String(100), nullable=False)
+    description = Column(String(250), nullable = False)
 
 class Ships(Base):
     __tablename__='character'
     id = Column(Integer, primary_key=True)
     ships_name = Column(String(100), nullable=False)
+    description = Column(String(250), nullable = False)
 
 
 class Planet_Favorite(Base):
